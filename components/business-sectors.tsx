@@ -41,7 +41,7 @@ export default function BusinessSectors() {
     },
     {
       name: "Industrial",
-      image: "https://images.unsplash.com/photo-1631468182520-812b1e388780?q=80&w=1374&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1374&auto=format&fit=crop",
       description: "Manufacturing and industrial operations spanning multiple sectors and technologies.",
       stats: ["15 Manufacturing Plants", "3000+ Employees", "20+ Product Lines"],
       year: "Since 1980",
@@ -55,7 +55,7 @@ export default function BusinessSectors() {
     },
     {
       name: "Oil & Gas",
-      image: "https://images.unsplash.com/photo-1589923188900-85933c84cce0?q=80&w=1470&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1695060601967-7fb135446f67?q=80&w=1470&auto=format&fit=crop",
       description: "Exploration, production, and distribution of oil and gas resources globally.",
       stats: ["10+ Oil Fields", "5 Refineries", "3 Distribution Networks"],
       year: "Since 1978",
@@ -69,7 +69,7 @@ export default function BusinessSectors() {
     },
     {
       name: "Sports & Leisure",
-      image: "https://images.unsplash.com/photo-1471295253337-3ceaaad65897?q=80&w=1468&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1468&auto=format&fit=crop",
       description: "Managing sports facilities, teams, and leisure destinations for entertainment and recreation.",
       stats: ["15 Sports Complexes", "5 Professional Teams", "10M+ Annual Visitors"],
       year: "Since 2000",

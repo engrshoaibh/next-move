@@ -1,10 +1,11 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [currentText, setCurrentText] = useState(0)
 
   useEffect(() => {
     // Ensure video plays automatically and handles loading
@@ -13,7 +14,20 @@ export default function Hero() {
         console.log("Video autoplay was prevented:", error)
       })
     }
+
+    // Cycle through the texts every 4 seconds
+    const interval = setInterval(() => {
+      setCurrentText((prev) => (prev + 1) % 3)
+    }, 4000)
+
+    return () => clearInterval(interval)
   }, [])
+
+  const texts = [
+    "Innovative Solutions.",
+    "Proven Results.",
+    "Transforming Enterprises."
+  ]
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -27,13 +41,17 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10 text-center">
+        
         <motion.h1
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
+          className="text-4xl md:text-6xl lg:text-8xl font-bold text-white mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          style={{
+            fontFamily: "Poppins, sans-serif",  // Change font style (use your preferred font)
+          }}
         >
-          NEXT MOVE GROUP
+          Empowering Your Business for Growth
         </motion.h1>
 
         <motion.h2
@@ -42,21 +60,36 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          OF COMPANIES
+          <motion.div
+            key={currentText}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 1 }}
+            style={{
+              textTransform: "uppercase",  // Capitalize the text
+              fontFamily: "Open Sans, sans-serif",  // Change font style (use your preferred font)
+              fontWeight: "bold",  // Optional, adjust the weight to make the text stand out
+              fontSize: "2rem",  // Adjust font size as needed
+            }}
+          >
+            {texts[currentText]}
+          </motion.div>
         </motion.h2>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <a
-            href="#who-we-are"
-            className="inline-block bg-white text-primary px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all"
-          >
-            Learn More
-          </a>
-        </motion.div>
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+>
+  <a
+    href="#who-we-are"
+    className="inline-block bg-white text-primary px-8 py-3 rounded-full font-medium transition-colors duration-300 hover:bg-[#002868] hover:text-white"
+  >
+    Learn More
+  </a>
+</motion.div>
+
       </div>
     </section>
   )

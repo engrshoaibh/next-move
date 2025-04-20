@@ -1,10 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Menu, X, Linkedin } from "lucide-react"
 import { scrollToSection } from "@/lib/smooth-scroll"
+import Link from "next/link"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -18,9 +18,9 @@ export default function Navbar() {
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 px-4 md:px-6 py-4">
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#" className="text-white text-xl md:text-2xl font-bold" onClick={(e) => handleNavClick(e, "#")}>
-          NEXT MOVE GROUP OF COMPANIES
-        </a>
+        <Link href="/" className="text-white text-xl md:text-2xl font-bold" >
+          NEXT MOVE
+        </Link>
 
         <div className="hidden md:flex items-center space-x-8">
           <a
@@ -44,13 +44,12 @@ export default function Navbar() {
           >
             CAREERS
           </a>
-          <a
-            href="#contact-us"
+          <Link
+            href="/contact"
             className="text-white hover:text-gray-300 transition-colors"
-            onClick={(e) => handleNavClick(e, "#contact-us")}
           >
             CONTACT US
-          </a>
+          </Link>
           <a
             href="https://linkedin.com"
             target="_blank"
@@ -90,13 +89,13 @@ export default function Navbar() {
             >
               CAREERS
             </a>
-            <a
-              href="#contact-us"
+            <Link
+              href="/contact"
               className="text-white hover:text-gray-300 transition-colors"
-              onClick={(e) => handleNavClick(e, "#contact-us")}
+              onClick={() => setIsMenuOpen(false)}
             >
               CONTACT US
-            </a>
+            </Link>
             <a
               href="https://linkedin.com"
               target="_blank"
