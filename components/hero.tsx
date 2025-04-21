@@ -10,10 +10,11 @@ export default function Hero() {
 
   useEffect(() => {
     // Determine user's location and set the video source
-    fetch("https://ipapi.co/json/")
+    fetch("https://ipwho.is/")
       .then(res => res.json())
       .then(data => {
         const country = data.country_code
+        console.log("Your Country", country_code);
         if (["AE", "SA", "BH"].includes(country)) {
           setVideoSrc("https://res.cloudinary.com/db8d9l4jw/video/upload/v1745170510/uae_gcbkq7.webm")
         } else if (["US", "GB"].includes(country)) {
