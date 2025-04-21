@@ -1,12 +1,12 @@
-// pages/api/ip-info.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+// app/api/ip-info/route.ts
+import { NextResponse } from 'next/server';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   try {
     const response = await fetch('https://ipapi.co/json/');
     const data = await response.json();
-    res.status(200).json(data);
+    return NextResponse.json(data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch IP info' });
+    return NextResponse.json({ error: 'Failed to fetch IP info' }, { status: 500 });
   }
 }
