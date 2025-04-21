@@ -9,16 +9,15 @@ export default function Hero() {
   const [videoSrc, setVideoSrc] = useState("")
 
   useEffect(() => {
-    // Fetch country information to adjust video source
-    fetch("/api/ip-info")
-      .then((res) => res.json())
-      .then((data) => {
+    // Determine user's location and set the video source
+    fetch("https://ipapi.co/json/")
+      .then(res => res.json())
+      .then(data => {
         const country = data.country_code
-        console.log("Country:", country)
         if (["AE", "SA", "BH"].includes(country)) {
           setVideoSrc("https://res.cloudinary.com/db8d9l4jw/video/upload/v1745170510/uae_gcbkq7.webm")
         } else if (["US", "GB"].includes(country)) {
-          setVideoSrc("https://res.cloudinary.com/db8d9l4jw/video/upload/v1745060534/1471970_People_3840x2160_ilrumt.webm")
+          setVideoSrc("https://example.com/us-uk-video.webm")
         } else {
           setVideoSrc("https://res.cloudinary.com/db8d9l4jw/video/upload/v1745060534/1471970_People_3840x2160_ilrumt.webm")
         }
@@ -27,33 +26,46 @@ export default function Hero() {
         // Fallback if geolocation fails
         setVideoSrc("https://res.cloudinary.com/db8d9l4jw/video/upload/v1745060534/1471970_People_3840x2160_ilrumt.webm")
       })
+  }, [])
 
-    // Ensure video plays automatically and handle errors
-    if (videoRef.current && videoSrc) {
+  useEffect(() => {
+    if (videoRef.current) {
       videoRef.current.play().catch((error) => {
         console.log("Video autoplay was prevented:", error)
       })
     }
 
-    // Rotate through text phrases
     const interval = setInterval(() => {
       setCurrentText((prev) => (prev + 1) % 3)
     }, 4000)
 
     return () => clearInterval(interval)
-  }, [videoSrc])  // Add videoSrc as a dependency to update video when the source changes
+  }, [])
 
-  const texts = ["Innovative Solutions.", "Proven Results.", "Transforming Enterprises."]
+  const texts = [
+    "Innovative Solutions.",
+    "Proven Results.",
+    "Transforming Enterprises."
+  ]
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/50 z-10"></div>
-        <video ref={videoRef} autoPlay muted loop playsInline className="w-full h-full object-cover">
-          <source src={videoSrc} type="video/webm" />
-          Your browser does not support the video tag.
-        </video>
+        {videoSrc && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src={videoSrc} type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+        )}
       </div>
 
       <div className="container mx-auto px-4 relative z-10 text-center">
@@ -64,10 +76,10 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           style={{ fontFamily: "Poppins, sans-serif" }}
         >
-          NEXT MOVE GROUP
+          Empowering Your Business for Growth
         </motion.h1>
 
-        <motion.div
+        <motion.h2
           className="text-xl md:text-2xl lg:text-3xl text-white mb-8 font-light"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,12 +93,14 @@ export default function Hero() {
             transition={{ duration: 1 }}
             style={{
               textTransform: "uppercase",
+              fontFamily: "Open Sans, sans-serif",
               fontWeight: "bold",
+              fontSize: "2rem"
             }}
           >
             {texts[currentText]}
           </motion.div>
-        </motion.div>
+        </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
