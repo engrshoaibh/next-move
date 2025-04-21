@@ -10,7 +10,7 @@ export default function Hero() {
 
   useEffect(() => {
     // Determine user's location and set the video source
-    fetch("https://ipapi.co/json/")
+    fetch("/api/ip-info")
       .then(res => res.json())
       .then(data => {
         const country = data.country_code
